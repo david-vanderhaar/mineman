@@ -188,19 +188,15 @@ class Pacman extends Phaser.Scene {
     this.load.image("powerPill","pacman items/spr_power_pill_0.png");
 
 
-    // this.load.spritesheet("pinkGhost","ghost/pink ghost/spr_ghost_pink_0.png",{
     this.load.spritesheet("pinkGhost","ghost/creeper.png",{
       frameWidth:32,frameHeight:32
     });
-    // this.load.spritesheet("orangeGhost","ghost/orange ghost/spr_ghost_orange_0.png",{
     this.load.spritesheet("orangeGhost","ghost/creeper.png",{
       frameWidth:32,frameHeight:32
     });
-    // this.load.spritesheet("blueGhost","ghost/blue ghost/spr_ghost_blue_0.png",{
     this.load.spritesheet("blueGhost","ghost/creeper.png",{
       frameWidth:32,frameHeight:32
     });
-    // this.load.spritesheet("redGhost","ghost/red ghost/spr_ghost_red_0.png",{
     this.load.spritesheet("redGhost","ghost/creeper.png",{
       frameWidth:32,frameHeight:32
     });

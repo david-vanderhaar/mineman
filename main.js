@@ -1052,3 +1052,10 @@ isMovingInxDirection(direction) {
   scene: Pacman,
  };
  const game = new Phaser.Game(config);
+
+//  change css scale of #container based on screen size
+const container = document.getElementById("container");
+container.style.transform = `scale(${Math.min(window.innerWidth / 464, window.innerHeight / 560)})`;
+window.addEventListener("resize", () => {
+  container.style.transform = `scale(${Math.min(window.innerWidth / 464, window.innerHeight / 560)})`;
+});

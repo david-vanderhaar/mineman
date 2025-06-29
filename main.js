@@ -686,6 +686,11 @@ respawnGhost(ghost) {
   }
   
   handleDirectionInput() {
+    this.handleDirectionInputKeyboard();
+    this.handleDirectionInputTouch();
+  }
+
+  handleDirectionInputKeyboard() {
     const arrowKeys = ["left","right","up","down"];
     for (const key of arrowKeys) {
       if((this.cursors[key].isDown && this.direction!== key) || (this.hasRespawned)) {
@@ -699,6 +704,46 @@ respawnGhost(ghost) {
         );
         break;
       }
+    }
+  }
+
+  handleDirectionInputTouch() {
+    if (!this.touchInitialized) {
+      this.touchInitialized = true;
+      let startX = 0, startY = 0, endX = 0, endY = 0;
+      this.input.on('pointerdown', pointer => {
+        startX = pointer.x;
+        startY = pointer.y;
+      });
+      this.input.on('pointerup', pointer => {
+        endX = pointer.x;
+        endY = pointer.y;
+        const dx = endX - startX;
+        const dy = endY - startY;
+        if (Math.abs(dx) > Math.abs(dy)) {
+          if (dx > 20) {
+            this.setDirectionFromTouch('right');
+          } else if (dx < -20) {
+            this.setDirectionFromTouch('left');
+          }
+        } else {
+          if (dy > 20) {
+            this.setDirectionFromTouch('down');
+          } else if (dy < -20) {
+            this.setDirectionFromTouch('up');
+          }
+        }
+      });
+    }
+  }
+
+  setDirectionFromTouch(direction) {
+    if (this.direction !== direction) {
+      this.previousDirection = this.direction;
+      this.direction = direction;
+      this.nextIntersection = this.getNextIntersectionInNextDirection(
+        this.pacman.x, this.pacman.y, this.previousDirection, direction
+      );
     }
   }
 

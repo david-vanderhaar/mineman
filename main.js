@@ -158,34 +158,49 @@ class Pacman extends Phaser.Scene {
   preload() {
     this.load.image("pacman tileset","pac man tiles/tileset.png");
     this.load.tilemapTiledJSON("map","pacman-map.json");
-    this.load.spritesheet("pacman","pacman characters/pacman/pacman0.png",{
+    this.load.spritesheet("pacman","pacman characters/pacman/steve0.png",{
       frameWidth:32,frameHeight:32
     });
-    this.load.spritesheet("pacman1","pacman characters/pacman/pacman1.png",{
+    this.load.spritesheet("pacman1","pacman characters/pacman/steve0.png",{
       frameWidth:32,frameHeight:32
     });
-    this.load.spritesheet("pacman2","pacman characters/pacman/pacman2.png",{
+    this.load.spritesheet("pacman2","pacman characters/pacman/steve0.png",{
       frameWidth:32,frameHeight:32
     });
-    this.load.spritesheet("pacman3","pacman characters/pacman/pacman3.png",{
+    this.load.spritesheet("pacman3","pacman characters/pacman/steve0.png",{
       frameWidth:32,frameHeight:32
     });
-    this.load.spritesheet("pacman4","pacman characters/pacman/pacman4.png",{
-      frameWidth:32,frameHeight:32
-    });
-
-    this.load.spritesheet("pacmanDeath1","pac man & life counter & death/pac man death/spr_pacdeath_0.png",{
-      frameWidth:32,frameHeight:32
-    });
-    this.load.spritesheet("pacmanDeath2","pac man & life counter & death/pac man death/spr_pacdeath_1.png",{
-      frameWidth:32,frameHeight:32
-    });
-    this.load.spritesheet("pacmanDeath3","pac man & life counter & death/pac man death/spr_pacdeath_2.png",{
+    this.load.spritesheet("pacman4","pacman characters/pacman/steve0.png",{
       frameWidth:32,frameHeight:32
     });
 
-    this.load.image("dot","pacman items/dot.png");
-    this.load.image("powerPill","pacman items/spr_power_pill_0.png");
+    this.load.spritesheet("pacmanDeath1","fx/explosion_0/Fx06_01.png",{
+      frameWidth:64,frameHeight:64
+    });
+    this.load.spritesheet("pacmanDeath2","fx/explosion_0/Fx06_02.png",{
+      frameWidth:64,frameHeight:64
+    });
+    this.load.spritesheet("pacmanDeath3","fx/explosion_0/Fx06_03.png",{
+      frameWidth:64,frameHeight:64
+    });
+    this.load.spritesheet("pacmanDeath4","fx/explosion_0/Fx06_04.png",{
+      frameWidth:64,frameHeight:64
+    });
+    this.load.spritesheet("pacmanDeath5","fx/explosion_0/Fx06_05.png",{
+      frameWidth:64,frameHeight:64
+    });
+    this.load.spritesheet("pacmanDeath6","fx/explosion_0/Fx06_06.png",{
+      frameWidth:64,frameHeight:64
+    });
+    this.load.spritesheet("pacmanDeath7","fx/explosion_0/Fx06_07.png",{
+      frameWidth:64,frameHeight:64
+    });
+    this.load.spritesheet("pacmanDeath8","fx/explosion_0/Fx06_08.png",{
+      frameWidth:64,frameHeight:64
+    });
+
+    this.load.image("dot","pac man tiles/chicken_leg.png");
+    this.load.image("powerPill","pac man tiles/lava_bucket.png");
 
 
     this.load.spritesheet("pinkGhost","ghost/creeper.png",{
@@ -236,6 +251,11 @@ class Pacman extends Phaser.Scene {
         {key: "pacmanDeath1"},
         {key: "pacmanDeath2"},
         {key: "pacmanDeath3"},
+        {key: "pacmanDeath4"},
+        {key: "pacmanDeath5"},
+        {key: "pacmanDeath6"},
+        {key: "pacmanDeath7"},
+        {key: "pacmanDeath8"},
       ],
       frameRate: 10,
       repeat:0
@@ -435,10 +455,12 @@ class Pacman extends Phaser.Scene {
       }
     });
 
-    this.powerPills.create(32,144,"powerPill");
-    this.powerPills.create(432,144,"powerPill");
-    this.powerPills.create(32,480,"powerPill");
-    this.powerPills.create(432,480,"powerPill");
+    const pills = []
+    pills.push(this.powerPills.create(32,144,"powerPill"))
+    pills.push(this.powerPills.create(432,144,"powerPill"))
+    pills.push(this.powerPills.create(32,480,"powerPill"))
+    pills.push(this.powerPills.create(432,480,"powerPill"))
+
   }
   eatDot(pacman,dot) {
     dot.disableBody(true,true);
@@ -777,8 +799,8 @@ respawnGhost(ghost) {
   changeDirection(flipX,flipY,angle,velocityX,velocityY) {
 
     this.pacman.setFlipX(flipX);
-    this.pacman.setFlipY(flipY);
-    this.pacman.setAngle(angle);
+    // this.pacman.setFlipY(flipY);
+    // this.pacman.setAngle(angle);
     this.pacman.setVelocityY(velocityY);
     this.pacman.setVelocityX(velocityX);
   }

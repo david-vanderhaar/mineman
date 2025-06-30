@@ -26,7 +26,8 @@ class Pacman extends Phaser.Scene {
     this.currentMode = "scatter";
     this.initModeTimers();
 
-    this.lives = 3;
+    this.lives = 10;
+    this.lifeCounters = [];
     this.isPacmanAlive = true;
     this.hasRespawned = false
     
@@ -222,8 +223,7 @@ class Pacman extends Phaser.Scene {
       frameWidth:32,frameHeight:32
     });
     this.load.image("endGameImage","pac man text/spr_message_2.png");
-    this.load.image("lifeCounter1","pac man & life counter & death/pac man life counter/spr_lifecounter_0.png");
-    this.load.image("lifeCounter2","pac man & life counter & death/pac man life counter/spr_lifecounter_0.png");
+    this.load.image("lifeCounter","pac man & life counter & death/pac man life counter/spr_lifecounter_0.png");
   }
   create() {
     this.map = this.make.tilemap({key:"map"});
@@ -289,9 +289,12 @@ class Pacman extends Phaser.Scene {
     this.ghosts.forEach(ghost => {
       this.physics.add.overlap(this.pacman,ghost,this.handlePacmanGhostCollision,null,this);
     });
-      this.lifeCounter1 = this.add.image(32,32,"lifeCounter1");
-      this.lifeCounter2 = this.add.image(56,32,"lifeCounter2");
-    }
+      
+
+    Array(this.lives).fill().forEach((_,index)=>{
+      this.lifeCounters.push(this.add.image(80+index*24,32,"lifeCounter"));
+    });
+  }
 
   initializeGhosts(layer) {
     this.pinkGhost = this.initializeGhost(232,290,"pinkGhost",layer);
@@ -592,10 +595,7 @@ class Pacman extends Phaser.Scene {
  }
  resetAfterDeath() {
   this.lives -=1;
-  if(this.lives ===1)
-    this.lifeCounter1.destroy();
-  if(this.lives ===2)
-    this.lifeCounter2.destroy();
+  this.lifeCounters.pop().destroy();
   if(this.lives>0) {
     this.pacman.setPosition(230,432);
     this.resetGhosts();

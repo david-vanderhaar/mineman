@@ -201,6 +201,8 @@ class Pacman extends Phaser.Scene {
     });
 
     this.load.image("dot","pac man tiles/chicken_leg.png");
+    this.load.image("gold","pac man tiles/gold.png");
+    this.load.image("diamond","pac man tiles/diamond.png");
     this.load.image("powerPill","pac man tiles/lava_bucket.png");
 
 
@@ -454,7 +456,14 @@ class Pacman extends Phaser.Scene {
       if(tile.index === -1 && rightTile && rightTile.index === -1 && bottomTile && bottomTile.index === -1 && rightBottomTile && rightBottomTile.index === -1){
         const x = tile.x*tile.width;
         const y = tile.y*tile.height;
-        this.dots.create(x+tile.width,y+tile.height,"dot");
+        const rand = Math.random();
+        if (rand < 0.01) {
+          this.dots.create(x + tile.width, y + tile.height, "diamond");
+        } else if (rand < 0.11) {
+          this.dots.create(x + tile.width, y + tile.height, "gold");
+        } else {
+          this.dots.create(x + tile.width, y + tile.height, "dot");
+        }
       }
     });
 

@@ -60,11 +60,11 @@
         {
          "columns":29,
          "firstgid":1,
-         "image":"pac man tiles\/tileset.png",
+         "image":"tileset.png",
          "imageheight":244,
          "imagewidth":470,
          "margin":0,
-         "name":"pacman tileset",
+         "name":"tileset",
          "spacing":0,
          "tilecount":435,
          "tileheight":16,

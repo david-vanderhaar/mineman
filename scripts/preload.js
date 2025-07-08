@@ -1,7 +1,7 @@
 export function preload(gameInstance) {
     gameInstance.load.image("tileset", "pac man tiles/tileset.png");
     gameInstance.load.tilemapTiledJSON("map-1","pac man tiles/pacman-map-1.json");
-    gameInstance.load.tilemapTiledJSON("map-2", "pac man tiles/pacman-map-2.json");
+    gameInstance.load.tilemapTiledJSON("map-2", "pac man tiles/pacman-map-3.json");
     
     gameInstance.load.spritesheet("pacman", "pacman characters/pacman/steve0.png", {
         frameWidth: 32, frameHeight: 32

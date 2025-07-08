@@ -641,7 +641,6 @@ class Pacman extends Phaser.Scene {
 
     // all dots eaten, go to next level
     console.log(this.dots.countActive());
-    
     if (this.dots.countActive() <= 0) {
 
       // increment level
